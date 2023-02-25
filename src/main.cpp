@@ -12,12 +12,17 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
 void setup() {
   M5.begin();      
   pixels.begin();  
-  M5.Lcd.println(("RGB Tester"));
+
+  M5.Axp.SetLcdVoltage(2600);
+  M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
+  M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
 }
 
 int i = 0, j = 1, k = 2;
 
 void loop() {
+  M5.update();
+
   pixels.setPixelColor(i++, pixels.Color(100, 0, 0));  // Bright red
   pixels.setPixelColor(j++, pixels.Color(0, 100, 0));  // Bright green
   pixels.setPixelColor(k++, pixels.Color(0, 0, 100));  // Bright blue
@@ -29,4 +34,8 @@ void loop() {
     j = 0;
   else if (k == 3)
     k = 0;
+
+  if(M5.BtnA.read()) {
+    M5.shutdown();  
+  } 
 }
