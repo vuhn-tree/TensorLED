@@ -37,6 +37,11 @@ void loop() {
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS, 4);
 
+  const float batV =  M5.Axp.GetBatVoltage();
+  const float batA =  M5.Axp.GetBatCurrent();
+  sprintf(buf, "Power: %2.2fV %2.1fmA", batV, batA);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 25, 4);
+
   if(M5.BtnB.read()) {
     pixels.setPixelColor(1, RGB_GREEN);
   } else {
@@ -49,4 +54,6 @@ void loop() {
   if(M5.BtnA.read()) {
     M5.shutdown();  
   } 
+
+  
 }
