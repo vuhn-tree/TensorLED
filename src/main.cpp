@@ -19,7 +19,7 @@ uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 void setup() {
   M5.begin();      
   pixels.begin();  
-
+  pixels.setBrightness(10);
 
   M5.Axp.SetLcdVoltage(2600);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
@@ -39,8 +39,18 @@ void loop() {
 
   const float batV =  M5.Axp.GetBatVoltage();
   const float batA =  M5.Axp.GetBatCurrent();
-  sprintf(buf, "Power: %2.2fV %2.1fmA", batV, batA);
+  sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 25, 4);
+
+  const float busV =  M5.Axp.GetVBusVoltage();
+  const float busA =  M5.Axp.GetVBusCurrent();
+  sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 50, 4);
+
+  const float vinV =  M5.Axp.GetVinVoltage();
+  const float vinA =  M5.Axp.GetVinCurrent();
+  sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 75, 4);
 
   if(M5.BtnB.read()) {
     pixels.setPixelColor(1, RGB_GREEN);
