@@ -55,5 +55,7 @@ void loop() {
     M5.shutdown();  
   } 
 
-  
+  if(M5.BtnC.read()) {  
+    M5.Axp.SetLcdVoltage(3300);
+  }
 }
