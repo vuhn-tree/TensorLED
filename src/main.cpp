@@ -6,10 +6,15 @@
 
 const int INFO_HEIGHT_POS = 25;
 
+
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
     NUMPIXELS, PIN,
     NEO_GRB +
         NEO_KHZ800);  //set number of LEDs, pin number, LED type.
+
+uint32_t RGB_RED = pixels.Color(100, 0, 0);
+uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
+uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
 void setup() {
   M5.begin();      
@@ -32,17 +37,14 @@ void loop() {
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS, 4);
 
-  pixels.setPixelColor(i++, pixels.Color(100, 0, 0));  // Bright red
-  pixels.setPixelColor(j++, pixels.Color(0, 100, 0));  // Bright green
-  pixels.setPixelColor(k++, pixels.Color(0, 0, 100));  // Bright blue
+  if(M5.BtnB.read()) {
+    pixels.setPixelColor(1, RGB_GREEN);
+  } else {
+    pixels.setPixelColor(1, RGB_RED);
+  }
+
   pixels.show();  //sends the updated color to the hardware.
   delay(500);
-  if (i == 3)
-    i = 0;
-  else if (j == 3)
-    j = 0;
-  else if (k == 3)
-    k = 0;
 
   if(M5.BtnA.read()) {
     M5.shutdown();  
