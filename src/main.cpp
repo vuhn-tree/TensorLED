@@ -62,8 +62,10 @@ void loop() {
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 100, 4);
   pixels.setBrightness(normalVal);
-  
 
+  const int lcdPotVal = map(cur_sensorValue, 0, 4096, 2500, 3300);
+  M5.Axp.SetLcdVoltage(lcdPotVal);
+  // M5.Lcd.setBrightness(normalVal);
 
   if (M5.BtnB.read()) {
     pixels.setPixelColor(1, RGB_GREEN);
