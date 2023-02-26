@@ -1,15 +1,15 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
 
-#define PIN 26  // Port A
+#define LED_PIN 26  // Port B
 #define NUMPIXELS 3
 
-int sensorPin = 13;          // set the input pin for the potentiometer.
+const int POT_PIN = 13; // Port C
 
 const int INFO_HEIGHT_POS = 25;
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
-    NUMPIXELS, PIN,
+    NUMPIXELS, LED_PIN,
     NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
 
 uint32_t RGB_RED = pixels.Color(100, 0, 0);
@@ -23,7 +23,7 @@ void setup() {
   pixels.begin();
   pixels.setBrightness(10);
 
-  pinMode(sensorPin, INPUT); // Sets the specified pin to input mode.
+  pinMode(POT_PIN, INPUT); // Sets the specified pin to input mode.
 
   M5.Axp.SetLcdVoltage(2600);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
@@ -57,7 +57,7 @@ void loop() {
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 75, 4);
 
   // mapped to pot
-  cur_sensorValue = analogRead(sensorPin); // read the value from the sensor.
+  cur_sensorValue = analogRead(POT_PIN); // read the value from the sensor.
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 100, 4);
