@@ -58,9 +58,11 @@ void loop() {
 
   // mapped to pot
   cur_sensorValue = analogRead(sensorPin); // read the value from the sensor.
-  const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
+  const int normalVal = map(cur_sensorValue, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 100, 4);
+  pixels.setBrightness(normalVal);
+  
 
 
   if (M5.BtnB.read()) {
