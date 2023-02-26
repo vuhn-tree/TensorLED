@@ -1,10 +1,10 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
 
-#define PIN 32  // Port A
+#define PIN 26  // Port A
 #define NUMPIXELS 3
 
-int sensorPin = 36;          // set the input pin for the potentiometer.
+int sensorPin = 13;          // set the input pin for the potentiometer.
 
 const int INFO_HEIGHT_POS = 25;
 
