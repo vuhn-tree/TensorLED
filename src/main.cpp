@@ -2,9 +2,8 @@
 #include <M5Core2.h>
 
 #define LED_PIN 26  // Port B
+#define POT_PIN 13 // Port C
 #define NUMPIXELS 3
-
-const int POT_PIN = 13; // Port C
 
 const int INFO_HEIGHT_POS = 25;
 
@@ -12,11 +11,11 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
     NUMPIXELS, LED_PIN,
     NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
 
-uint32_t RGB_RED = pixels.Color(100, 0, 0);
-uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
-uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
+const uint32_t RGB_RED = pixels.Color(100, 0, 0);
+const uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
+const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
-int cur_sensorValue = 0;    // Stores the value currently read by the sensor.
+int potVal = 0;    // Stores the value currently read by the sensor.
 
 void setup() {
   M5.begin();
@@ -29,8 +28,6 @@ void setup() {
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
   M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
 }
-
-int i = 0, j = 1, k = 2;
 
 void loop() {
   M5.update();
@@ -57,15 +54,14 @@ void loop() {
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 75, 4);
 
   // mapped to pot
-  cur_sensorValue = analogRead(POT_PIN); // read the value from the sensor.
-  const int normalVal = map(cur_sensorValue, 0, 4096, 0, 255);
+  potVal = analogRead(POT_PIN); // read the value from the sensor.
+  const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 100, 4);
   pixels.setBrightness(normalVal);
 
-  const int lcdPotVal = map(cur_sensorValue, 0, 4096, 2500, 3300);
+  const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
   M5.Axp.SetLcdVoltage(lcdPotVal);
-  // M5.Lcd.setBrightness(normalVal);
 
   if (M5.BtnB.read()) {
     pixels.setPixelColor(1, RGB_GREEN);
