@@ -5,7 +5,7 @@
 #define POT_PIN 13  // Port C
 #define NUMPIXELS 3
 
-const int INFO_HEIGHT_POS = 25;
+const int DISP_OFFSET = 25;
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
     NUMPIXELS, LED_PIN,
@@ -36,28 +36,28 @@ void loop() {
 
   const float powerTemp = M5.Axp.GetTempInAXP192();
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET, 4);
 
   const float batV = M5.Axp.GetBatVoltage();
   const float batA = M5.Axp.GetBatCurrent();
   sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 2, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 2, 4);
 
   const float busV = M5.Axp.GetVBusVoltage();
   const float busA = M5.Axp.GetVBusCurrent();
   sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 3, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
 
   const float vinV = M5.Axp.GetVinVoltage();
   const float vinA = M5.Axp.GetVinCurrent();
   sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 4, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
 
   // mapped to pot
   potVal = analogRead(POT_PIN);  // read the value from the sensor.
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 5, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
   pixels.setBrightness(normalVal);
 
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
