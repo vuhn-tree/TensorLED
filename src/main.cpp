@@ -41,23 +41,23 @@ void loop() {
   const float batV = M5.Axp.GetBatVoltage();
   const float batA = M5.Axp.GetBatCurrent();
   sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 25, 4);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 2, 4);
 
   const float busV = M5.Axp.GetVBusVoltage();
   const float busA = M5.Axp.GetVBusCurrent();
   sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 50, 4);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 3, 4);
 
   const float vinV = M5.Axp.GetVinVoltage();
   const float vinA = M5.Axp.GetVinCurrent();
   sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 75, 4);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 4, 4);
 
   // mapped to pot
   potVal = analogRead(POT_PIN);  // read the value from the sensor.
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 100, 4);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS * 5, 4);
   pixels.setBrightness(normalVal);
 
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
