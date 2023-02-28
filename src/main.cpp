@@ -27,6 +27,8 @@ void setup() {
   M5.Axp.SetLcdVoltage(2600);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
   M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
+
+  Serial.begin(115200);
 }
 
 void loop() {
@@ -53,7 +55,6 @@ void loop() {
   sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
 
-  // mapped to pot
   potVal = analogRead(POT_PIN);  // read the value from the sensor.
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
@@ -67,6 +68,10 @@ void loop() {
     pixels.setPixelColor(1, RGB_GREEN);
   } else {
     pixels.setPixelColor(1, RGB_RED);
+  }
+
+  while(Serial.available()){
+    Serial.write(Serial.read());
   }
 
   pixels.show();  // sends the updated color to the hardware.
