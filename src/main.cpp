@@ -72,6 +72,19 @@ void loop() {
   //   pixels.setPixelColor(1, RGB_RED);
   // }
 
+
+  int counter = 0;
+  while(Serial.available()){
+    // String chary = Serial.readString();
+    colorOption = Serial.read();
+
+    sprintf(buf, "[%d] read: %c", counter, colorOption);
+    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
+    // char chary = Serial.read();
+    // Serial.write(Serial.read());
+    ++counter;
+  }
+
   switch (colorOption)
   {
   case 'r':
@@ -84,18 +97,6 @@ void loop() {
   
   default:
     break;
-  }
-
-  int counter = 0;
-  while(Serial.available()){
-    String chary = Serial.readString();
-    char colorOption = Serial.read();
-
-    // sprintf(buf, "[%d] read: %s", counter, chary);
-    M5.Lcd.drawString(chary, 0, DISP_OFFSET * 6, 4);
-    // char chary = Serial.read();
-    // Serial.write(Serial.read());
-    ++counter;
   }
 
   pixels.show();  // sends the updated color to the hardware.
