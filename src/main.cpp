@@ -17,6 +17,8 @@ const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
 int potVal = 0;  // Stores the value currently read by the sensor.
 
+char colorOption = 'g';
+
 void setup() {
   M5.begin();
   pixels.begin();
@@ -64,18 +66,33 @@ void loop() {
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
   M5.Axp.SetLcdVoltage(lcdPotVal);
 
-  if (M5.BtnB.read()) {
-    pixels.setPixelColor(1, RGB_GREEN);
-  } else {
+  // if (M5.BtnB.read()) {
+  //   pixels.setPixelColor(1, RGB_GREEN);
+  // } else {
+  //   pixels.setPixelColor(1, RGB_RED);
+  // }
+
+  switch (colorOption)
+  {
+  case 'r':
     pixels.setPixelColor(1, RGB_RED);
+    break;
+
+  case 'g':
+    pixels.setPixelColor(1, RGB_GREEN);
+    break;
+  
+  default:
+    break;
   }
 
   int counter = 0;
   while(Serial.available()){
     String chary = Serial.readString();
+    char colorOption = Serial.read();
 
-    sprintf(buf, "[%d] read: %s", counter, chary);
-    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
+    // sprintf(buf, "[%d] read: %s", counter, chary);
+    M5.Lcd.drawString(chary, 0, DISP_OFFSET * 6, 4);
     // char chary = Serial.read();
     // Serial.write(Serial.read());
     ++counter;
