@@ -72,9 +72,9 @@ void loop() {
 
   int counter = 0;
   while(Serial.available()){
-    char chary = Serial.read();
+    String chary = Serial.readString();
 
-    sprintf(buf, "[%d] read: %c", counter, chary);
+    sprintf(buf, "[%d] read: %s", counter, chary);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
     // char chary = Serial.read();
     // Serial.write(Serial.read());
