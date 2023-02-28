@@ -70,8 +70,15 @@ void loop() {
     pixels.setPixelColor(1, RGB_RED);
   }
 
+  int counter = 0;
   while(Serial.available()){
-    Serial.write(Serial.read());
+    char chary = Serial.read();
+
+    sprintf(buf, "[%d] read: %c", counter, chary);
+    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
+    // char chary = Serial.read();
+    // Serial.write(Serial.read());
+    ++counter;
   }
 
   pixels.show();  // sends the updated color to the hardware.
