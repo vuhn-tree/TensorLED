@@ -66,37 +66,31 @@ void loop() {
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
   M5.Axp.SetLcdVoltage(lcdPotVal);
 
-  // if (M5.BtnB.read()) {
-  //   pixels.setPixelColor(1, RGB_GREEN);
-  // } else {
-  //   pixels.setPixelColor(1, RGB_RED);
-  // }
-
-
   int counter = 0;
-  while(Serial.available()){
+  while (Serial.available()) {
     // String chary = Serial.readString();
     colorOption = Serial.read();
 
-    sprintf(buf, "[%d] read: %c", counter, colorOption);
+    sprintf(buf, "[%d] color: %c", counter, colorOption);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
-    // char chary = Serial.read();
-    // Serial.write(Serial.read());
     ++counter;
   }
 
-  switch (colorOption)
-  {
-  case 'r':
-    pixels.setPixelColor(1, RGB_RED);
-    break;
+  switch (colorOption) {
+    case 'r':
+      pixels.setPixelColor(1, RGB_RED);
+      break;
 
-  case 'g':
-    pixels.setPixelColor(1, RGB_GREEN);
-    break;
-  
-  default:
-    break;
+    case 'g':
+      pixels.setPixelColor(1, RGB_GREEN);
+      break;
+
+    case 'b':
+      pixels.setPixelColor(1, RGB_BLUE);
+      break;
+
+    default:
+      break;
   }
 
   pixels.show();  // sends the updated color to the hardware.
