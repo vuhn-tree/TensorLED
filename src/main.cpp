@@ -3,12 +3,12 @@
 
 #define LED_PIN 26  // Port B
 #define POT_PIN 13  // Port C
-#define NUMPIXELS 3
+#define NUM_LEDS 3
 
 const int DISP_OFFSET = 25;
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
-    NUMPIXELS, LED_PIN,
+    NUM_LEDS, LED_PIN,
     NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
 
 const uint32_t RGB_RED = pixels.Color(100, 0, 0);
@@ -68,9 +68,7 @@ void loop() {
 
   int counter = 0;
   while (Serial.available()) {
-    // String chary = Serial.readString();
     colorOption = Serial.read();
-
     sprintf(buf, "[%d] color: %c", counter, colorOption);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
     ++counter;
