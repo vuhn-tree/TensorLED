@@ -4,7 +4,7 @@ ser = serial.Serial()
 ser.baudrate = 115200
 ser.port = '/dev/cu.wchusbserial51850172361'
 ser.open()
-ser.write(sys.argv[1])
+ser.write(sys.argv[1].encode())
 
 total = 0
 
