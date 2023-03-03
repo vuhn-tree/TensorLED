@@ -1,8 +1,10 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
 
-#define PORT_B 26  // Port B
-#define PORT_C 13  // Port C
+#define PORT_A 32
+#define PORT_B 26
+#define PORT_C 13
+
 #define NUM_LEDS 3
 
 const int DISP_OFFSET = 25;
