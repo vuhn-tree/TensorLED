@@ -32,7 +32,7 @@ void setup() {
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
   M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
 
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 
 void loop() {

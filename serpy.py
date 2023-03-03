@@ -1,7 +1,7 @@
 import serial, sys
 
 ser = serial.Serial()
-ser.baudrate = 115200
+ser.baudrate = 9600
 ser.port = '/dev/cu.wchusbserial51850172361'
 ser.open()
 ser.write(sys.argv[1].encode())
