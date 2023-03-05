@@ -5,8 +5,10 @@ ser.baudrate = 9600
 ser.port = '/dev/cu.wchusbserial51850172361'
 ser.open()
 
-ser.write(sys.argv[1].encode())
-print("Writing command: + " + sys.argv[1].encode())
+message = sys.argv[1].encode()
+# print("Writing command: + " + message)
+ser.write(message)
+
 print("Current port: " + ser.port)
 
 
