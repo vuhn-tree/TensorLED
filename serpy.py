@@ -4,12 +4,13 @@ ser = serial.Serial()
 ser.baudrate = 9600
 ser.port = '/dev/cu.wchusbserial51850172361'
 ser.open()
+print("Current port: " + ser.port)
 
 message = sys.argv[1].encode()
-# print("Writing command: + " + message)
+print("Writing command: " + message.decode())
 ser.write(message)
 
-print("Current port: " + ser.port)
+
 
 
 total = 0
