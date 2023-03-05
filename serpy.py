@@ -10,13 +10,4 @@ message = sys.argv[1].encode()
 print("Writing command: " + message.decode())
 ser.write(message)
 
-
-
-
-total = 0
-
-# while total < len(values):
-#     print ord(ser.read(1))
-#     total=total+1
-
 ser.close()
