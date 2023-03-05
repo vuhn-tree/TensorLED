@@ -19,7 +19,7 @@ const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
 int potVal = 0;  // Stores the value currently read by the sensor.
 
-char colorOption = 'g';
+char colorInput = 'g';
 
 void setup() {
   M5.begin();
@@ -70,13 +70,13 @@ void loop() {
 
   int counter = 0;
   while (Serial.available()) {
-    colorOption = Serial.read();
-    sprintf(buf, "[%d] color: %c", counter, colorOption);
+    colorInput = Serial.read();
+    sprintf(buf, "[%d] color: %c", counter, colorInput);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
     ++counter;
   }
 
-  switch (colorOption) {
+  switch (colorInput) {
     case 'r':
       pixels.setPixelColor(1, RGB_RED);
       break;
