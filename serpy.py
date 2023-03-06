@@ -1,4 +1,5 @@
-import serial, sys
+import serial
+import sys
 
 ser = serial.Serial()
 ser.baudrate = 9600
