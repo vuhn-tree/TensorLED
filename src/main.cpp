@@ -38,7 +38,7 @@ void setup() {
 void loop() {
   M5.update();
 
-  char buf[50];
+  char buf[40];
 
   const float powerTemp = M5.Axp.GetTempInAXP192();
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
