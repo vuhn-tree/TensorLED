@@ -57,9 +57,9 @@ cv2.destroyAllWindows()
 
 # cap = cv2.VideoCapture(2)
 
-#Check if the webcam is opened correctly
-if not cap.isOpened():
-    raise IOError("Cannot open webcam")
+# #Check if the webcam is opened correctly
+# if not cap.isOpened():
+#     raise IOError("Cannot open webcam")
 
 # while True:
 #     ret, frame = cap.read()
