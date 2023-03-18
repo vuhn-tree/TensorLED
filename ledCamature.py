@@ -8,8 +8,8 @@ for dir in [DATA_DIR, MODELS_DIR]:
     if not os.path.exists(dir):
         os.mkdir(dir)
 
-# import tarfile
-# import urllib.request
+import tarfile
+import urllib.request
 
 # Download and extract model
 MODEL_DATE = '20200711'
