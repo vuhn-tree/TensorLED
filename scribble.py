@@ -1,7 +1,7 @@
 import cv2
-import matplotlib.pyplot
+# import matplotlib.pyplot
 
-cv2.startWindowThread()
+# cv2.startWindowThread()
 
 # Path to image in local directory
 path = '/Users/vuhn/Desktop/test.png'
