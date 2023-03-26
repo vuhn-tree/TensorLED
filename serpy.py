@@ -8,7 +8,7 @@ ser.open()
 print("Current port: " + ser.port)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("color", help="b, g, r")
+parser.add_argument("--color", help="b, g, r")
 
 args = parser.parse_args()
 
