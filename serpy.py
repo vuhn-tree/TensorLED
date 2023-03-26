@@ -13,9 +13,7 @@ parser.add_argument(dest='color',)
 
 args = parser.parse_args()
 
-message = sys.argv[1].encode()
-
-print(args)
-ser.write(messaargsge)
+print("Writing Message: " + args.color)
+ser.write(args.color.encode())
 
 ser.close()
