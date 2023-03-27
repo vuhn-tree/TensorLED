@@ -1,5 +1,5 @@
 import serial
-import sys, argparse
+import sys, argparse, time
 
 ser = serial.Serial()
 ser.baudrate = 9600
@@ -15,6 +15,8 @@ args = parser.parse_args()
 
 if args.random:
     print("random")
+    while(True):
+        ser.write('b'.encode())
 else:
     print("Writing Message: " + args.color)
     ser.write(args.color.encode())
