@@ -16,7 +16,7 @@ args = parser.parse_args()
 if args.random:
     print("random")
     while(True):
-        ser.write('b'.encode())
+        ser.write('g'.encode())
 else:
     print("Writing Message: " + args.color)
     ser.write(args.color.encode())
