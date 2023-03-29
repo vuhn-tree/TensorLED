@@ -2,6 +2,8 @@
 #include <M5Core2.h>
 #include "Adafruit_PWMServoDriver.h"
 
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
+
 #define PORT_A 32
 #define PORT_B 26
 #define PORT_C 13
