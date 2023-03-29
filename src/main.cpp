@@ -1,5 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
+#include "Adafruit_PWMServoDriver.h"
 
 #define PORT_A 32
 #define PORT_B 26
