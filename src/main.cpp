@@ -128,6 +128,9 @@ void loop() {
       break;
   }
 
+// todo: servo
+//  servo_angle_write(0, normalVal);
+
   pixels.show();  // sends the updated color to the hardware.
   delay(500);
 
