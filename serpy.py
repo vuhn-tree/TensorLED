@@ -20,7 +20,8 @@ if args.color:
 
 if args.servo:
     print("Servo Angle: " + args.servo)
-    ser.write(args.servo.encode())
+    msg = "servo" + args.servo
+    ser.write(msg.encode())
 
 if args.random:
     print("random")
