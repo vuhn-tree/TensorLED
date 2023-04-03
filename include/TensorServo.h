@@ -14,6 +14,7 @@
 class TensorServo {
 public:
   TensorServo();
+  void setServoPulse(uint8_t n, double pulse);
 
 private:
   Adafruit_PWMServoDriver m_pwm;
