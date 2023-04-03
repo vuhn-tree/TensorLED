@@ -1,9 +1,7 @@
 
 #include <TensorServo.h>
 
-TensorServo::TensorServo() {
-    m_pwm = Adafruit_PWMServoDriver(0x40, Wire1);
-}
+TensorServo::TensorServo() { m_pwm = Adafruit_PWMServoDriver(0x40, Wire1); }
 
 void TensorServo::setServoPulse(uint8_t n, double pulse) {
   double pulselength;
