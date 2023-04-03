@@ -20,8 +20,8 @@ void TensorServo::setServoPulse(uint8_t n, double pulse) {
   m_pwm.setPWM(n, 0, pulse);
 }
 
-// void TensorServo::servo_angle_write(uint8_t n, int Angle) {
-//   double pulse = Angle;
-//   pulse = pulse / 90 + 0.5;
-//   setServoPulse(n, pulse);
-// }
+void TensorServo::servo_angle_write(uint8_t n, int Angle) {
+  double pulse = Angle;
+  pulse = pulse / 90 + 0.5;
+  setServoPulse(n, pulse);
+}

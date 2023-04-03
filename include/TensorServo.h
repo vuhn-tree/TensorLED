@@ -15,6 +15,7 @@ class TensorServo {
 public:
   TensorServo();
   void setServoPulse(uint8_t n, double pulse);
+  void servo_angle_write(uint8_t n, int Angle);
 
 private:
   Adafruit_PWMServoDriver m_pwm;
