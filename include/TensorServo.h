@@ -1,4 +1,5 @@
 #include <Wire.h>
+
 #include "Adafruit_PWMServoDriver.h"
 
 #define SERVOMIN 102  // This is the 'minimum' pulse length count (out of 4096)
@@ -12,11 +13,11 @@
 #define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
 
 class TensorServo {
-public:
+ public:
   TensorServo();
   void setServoPulse(uint8_t n, double pulse);
   void servo_angle_write(uint8_t n, int Angle);
 
-private:
+ private:
   Adafruit_PWMServoDriver m_pwm;
 };
