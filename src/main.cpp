@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
 #include <Wire.h>
+
 #include "Adafruit_PWMServoDriver.h"
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
@@ -128,8 +129,8 @@ void loop() {
       break;
   }
 
-// todo: servo
- servo_angle_write(0, normalVal);
+  // todo: servo
+  servo_angle_write(0, normalVal);
 
   pixels.show();  // sends the updated color to the hardware.
   delay(500);
