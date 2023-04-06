@@ -1,5 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
+#include <TensorServo.h>
 
 #define PORT_A 32
 #define PORT_B 26
@@ -21,6 +22,8 @@ int potVal = 0;  // Stores the value currently read by the sensor.
 
 char colorInput = 'g';
 
+TensorServo* servoA;
+
 void setup() {
   M5.begin();
   pixels.begin();
@@ -33,6 +36,8 @@ void setup() {
   M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
 
   Serial.begin(9600);
+
+  servoA = new TensorServo();
 }
 
 void loop() {
@@ -95,6 +100,7 @@ void loop() {
 
   // todo: servo
   // servo_angle_write(0, normalVal);
+  servoA->servo_angle_write(0, normalVal);
 
   pixels.show();  // sends the updated color to the hardware.
   delay(500);
