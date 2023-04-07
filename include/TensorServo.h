@@ -19,5 +19,5 @@ class TensorServo {
   void servo_angle_write(uint8_t n, int Angle);
 
  private:
-  Adafruit_PWMServoDriver m_pwm {Adafruit_PWMServoDriver(0x40, Wire1)};
+  Adafruit_PWMServoDriver m_pwm{Adafruit_PWMServoDriver(0x40, Wire1)};
 };
