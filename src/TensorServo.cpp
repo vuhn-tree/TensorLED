@@ -1,7 +1,12 @@
 
 #include <TensorServo.h>
 
-TensorServo::TensorServo() {}
+TensorServo::TensorServo() {
+Wire1.begin(21, 22);
+  m_pwm.begin();
+  m_pwm.setPWMFreq(50);
+//   Serial.begin(9600);
+}
 
 void TensorServo::setServoPulse(uint8_t n, double pulse) {
   double pulselength;
