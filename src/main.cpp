@@ -100,7 +100,9 @@ void loop() {
 
   // todo: servo
   // servo_angle_write(0, normalVal);
-  servoA->servo_angle_write(0, normalVal);
+  if (servoA != nullptr) {
+    servoA->servo_angle_write(0, normalVal);
+  }
 
   pixels.show();  // sends the updated color to the hardware.
   delay(500);
