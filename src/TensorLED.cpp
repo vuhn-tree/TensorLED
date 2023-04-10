@@ -1,8 +1,8 @@
 #include <TensorLED.h>
 
 uint32_t RGB_RED;
-// const uint32_t RGB_GREEN = m_pixels.Color(0, 100, 0);
-// const uint32_t RGB_BLUE = m_pixels.Color(0, 0, 100);
+uint32_t RGB_GREEN;
+uint32_t RGB_BLUE;
 
 
   TensorLED::TensorLED() {
@@ -13,5 +13,7 @@ uint32_t RGB_RED;
     m_pixels.setBrightness(10);
 
     RGB_RED = m_pixels.Color(100, 0, 0);
+    RGB_GREEN = m_pixels.Color(0, 100, 0);
 
+RGB_BLUE = m_pixels.Color(0, 0, 100);
   }
