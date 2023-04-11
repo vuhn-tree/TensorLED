@@ -4,16 +4,15 @@ uint32_t RGB_RED;
 uint32_t RGB_GREEN;
 uint32_t RGB_BLUE;
 
+TensorLED::TensorLED() {
+  m_pixels = Adafruit_NeoPixel(
+      NUM_LEDS, PORT_B,
+      NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
+  m_pixels.begin();
+  m_pixels.setBrightness(10);
 
-  TensorLED::TensorLED() {
-    m_pixels = Adafruit_NeoPixel(
-    NUM_LEDS, PORT_B,
-    NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
-    m_pixels.begin();
-    m_pixels.setBrightness(10);
-
-    RGB_RED = m_pixels.Color(100, 0, 0);
-    RGB_GREEN = m_pixels.Color(0, 100, 0);
-
-RGB_BLUE = m_pixels.Color(0, 0, 100);
-  }
+  RGB_RED = m_pixels.Color(100, 0, 0);
+  RGB_GREEN = m_pixels.Color(0, 100, 0);
+  RGB_BLUE = m_pixels.Color(0, 0, 100);
+  
+}
