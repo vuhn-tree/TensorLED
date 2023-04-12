@@ -9,6 +9,7 @@
 class TensorLED {
  public:
   TensorLED();
+    void setLEDColor(char colorInput);
 
  private:
   Adafruit_NeoPixel m_pixels;
