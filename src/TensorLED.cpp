@@ -15,7 +15,7 @@ TensorLED::TensorLED() {
   RGB_BLUE = m_pixels.Color(0, 0, 100);
 }
 
-void TensorLED::setLEDColor(char colorInput) {
+void TensorLED::setLEDColor(char& colorInput) {
   switch (colorInput) {
     case 'r':
       m_pixels.setPixelColor(1, RGB_RED);
