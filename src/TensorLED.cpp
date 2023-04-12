@@ -32,4 +32,6 @@ void TensorLED::setLEDColor(char colorInput) {
     default:
       break;
   }
+
+    m_pixels.show();  // sends the updated color to the hardware.
 }
