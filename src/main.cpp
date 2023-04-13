@@ -83,6 +83,7 @@ void loop() {
     ++counter;
   }
 
+led->setLEDColor(colorInput);
   switch (colorInput) {
     case 'r':
       pixels.setPixelColor(1, RGB_RED);
