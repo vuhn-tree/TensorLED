@@ -7,17 +7,7 @@
 #define PORT_B 26
 #define PORT_C 13
 
-// #define NUM_LEDS 3
-
 const int DISP_OFFSET = 25;
-
-// Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
-//     NUM_LEDS, PORT_B,
-//     NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
-
-// const uint32_t RGB_RED = pixels.Color(100, 0, 0);
-// const uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
-// const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
 int potVal = 0;  // Stores the value currently read by the sensor.
 
@@ -28,8 +18,6 @@ TensorLED* tensorLED;
 
 void setup() {
   M5.begin();
-  // pixels.begin();
-  // pixels.setBrightness(10);
 
   pinMode(PORT_C, INPUT);  // Sets the specified pin to input mode.
 
@@ -88,26 +76,8 @@ void loop() {
   tensorLED->setLEDColor(colorInput);
 // }
 
-  // switch (colorInput) {
-  //   case 'r':
-  //     pixels.setPixelColor(1, RGB_RED);
-  //     break;
-
-  //   case 'g':
-  //     pixels.setPixelColor(1, RGB_GREEN);
-  //     break;
-
-  //   case 'b':
-  //     pixels.setPixelColor(1, RGB_BLUE);
-  //     break;
-
-  //   default:
-  //     break;
-  // }
-
   servoA->servo_angle_write(0, normalVal);
 
-  // pixels.show();  // sends the updated color to the hardware.
   delay(500);
 
   if (M5.BtnA.read()) {
