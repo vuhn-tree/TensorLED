@@ -3,7 +3,9 @@ import argparse, time
 
 ser = serial.Serial()
 ser.baudrate = 9600
-ser.port = '/dev/cu.wchusbserial51850172361'
+# ser.port = '/dev/cu.wchusbserial51850172361'
+ser.port = '/dev/cu.usbserial-027A3CF8'
+# ser.port = '/dev/cu.wch*'
 ser.open()
 print("Current port: " + ser.port)
 
