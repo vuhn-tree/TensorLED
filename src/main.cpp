@@ -40,6 +40,7 @@ void setup() {
   Serial.begin(9600);
 
   servoA = new TensorServo();
+  led = new TensorLED();
 }
 
 void loop() {
