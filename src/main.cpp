@@ -7,29 +7,29 @@
 #define PORT_B 26
 #define PORT_C 13
 
-#define NUM_LEDS 3
+// #define NUM_LEDS 3
 
 const int DISP_OFFSET = 25;
 
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
-    NUM_LEDS, PORT_B,
-    NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
+// Adafruit_NeoPixel pixels = Adafruit_NeoPixel(
+//     NUM_LEDS, PORT_B,
+//     NEO_GRB + NEO_KHZ800);  // set number of LEDs, pin number, LED type.
 
-const uint32_t RGB_RED = pixels.Color(100, 0, 0);
-const uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
-const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
+// const uint32_t RGB_RED = pixels.Color(100, 0, 0);
+// const uint32_t RGB_GREEN = pixels.Color(0, 100, 0);
+// const uint32_t RGB_BLUE = pixels.Color(0, 0, 100);
 
 int potVal = 0;  // Stores the value currently read by the sensor.
 
 char colorInput = 'g';
 
 TensorServo* servoA;
-TensorLED* led;
+TensorLED* tensorLED;
 
 void setup() {
   M5.begin();
-  pixels.begin();
-  pixels.setBrightness(10);
+  // pixels.begin();
+  // pixels.setBrightness(10);
 
   pinMode(PORT_C, INPUT);  // Sets the specified pin to input mode.
 
@@ -40,7 +40,7 @@ void setup() {
   Serial.begin(9600);
 
   servoA = new TensorServo();
-  led = new TensorLED();
+  tensorLED = new TensorLED();
 }
 
 void loop() {
@@ -71,7 +71,7 @@ void loop() {
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
-  pixels.setBrightness(normalVal);
+  // pixels.setBrightness(normalVal);
 
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
   M5.Axp.SetLcdVoltage(lcdPotVal);
@@ -84,27 +84,30 @@ void loop() {
     ++counter;
   }
 
-led->setLEDColor(colorInput);
-  switch (colorInput) {
-    case 'r':
-      pixels.setPixelColor(1, RGB_RED);
-      break;
+// if(tensorLED != nullptr) {
+  tensorLED->setLEDColor(colorInput);
+// }
 
-    case 'g':
-      pixels.setPixelColor(1, RGB_GREEN);
-      break;
+  // switch (colorInput) {
+  //   case 'r':
+  //     pixels.setPixelColor(1, RGB_RED);
+  //     break;
 
-    case 'b':
-      pixels.setPixelColor(1, RGB_BLUE);
-      break;
+  //   case 'g':
+  //     pixels.setPixelColor(1, RGB_GREEN);
+  //     break;
 
-    default:
-      break;
-  }
+  //   case 'b':
+  //     pixels.setPixelColor(1, RGB_BLUE);
+  //     break;
+
+  //   default:
+  //     break;
+  // }
 
   servoA->servo_angle_write(0, normalVal);
 
-  pixels.show();  // sends the updated color to the hardware.
+  // pixels.show();  // sends the updated color to the hardware.
   delay(500);
 
   if (M5.BtnA.read()) {
