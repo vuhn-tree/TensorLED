@@ -9,8 +9,10 @@
 class TensorLED {
  public:
   TensorLED();
-  void setLEDColor(char& colorInput);
+  void setLEDColor(char colorInput);
 
  private:
-  Adafruit_NeoPixel m_pixels;
+  Adafruit_NeoPixel m_pixels {Adafruit_NeoPixel(
+      NUM_LEDS, PORT_B,
+      NEO_GRB + NEO_KHZ800)};  // set number of LEDs, pin number, LED type.
 };
