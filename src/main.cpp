@@ -13,7 +13,7 @@ int potVal = 0;  // Stores the value currently read by the sensor.
 
 char colorInput = 'g';
 
-TensorServo* servoA;
+TensorServo* tensorServo;
 TensorLED* tensorLED;
 
 void setup() {
@@ -27,7 +27,7 @@ void setup() {
 
   Serial.begin(9600);
 
-  servoA = new TensorServo();
+  tensorServo = new TensorServo();
   tensorLED = new TensorLED();
 }
 
@@ -76,7 +76,7 @@ void loop() {
 
 
   tensorLED->setLEDColor(colorInput);
-  servoA->servo_angle_write(0, normalVal);
+  tensorServo->servo_angle_write(0, normalVal);
 
   delay(500);
 
