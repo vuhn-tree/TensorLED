@@ -59,6 +59,8 @@ void loop() {
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
+
+  // TODO: Set brightnless
   // pixels.setBrightness(normalVal);
 
   const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
@@ -72,10 +74,8 @@ void loop() {
     ++counter;
   }
 
-// if(tensorLED != nullptr) {
-  tensorLED->setLEDColor(colorInput);
-// }
 
+  tensorLED->setLEDColor(colorInput);
   servoA->servo_angle_write(0, normalVal);
 
   delay(500);
