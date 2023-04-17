@@ -9,7 +9,7 @@
 class TensorLED {
  public:
   TensorLED();
-  void setLEDColor(char colorInput);
+  void setLEDColor(char& colorInput);
   void setLEDBrightness(const int brightness);
 
  private:
