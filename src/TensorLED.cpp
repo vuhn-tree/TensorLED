@@ -5,7 +5,7 @@ TensorLED::TensorLED() {
   m_pixels.setBrightness(10);
 }
 
-void TensorLED::setLEDColor(char& colorInput) {
+void TensorLED::setColor(char& colorInput) {
   switch (colorInput) {
     case 'r':
       m_pixels.setPixelColor(1, m_pixels.Color(100, 0, 0));
