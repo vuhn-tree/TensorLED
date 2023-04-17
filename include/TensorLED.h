@@ -10,6 +10,7 @@ class TensorLED {
  public:
   TensorLED();
   void setLEDColor(char colorInput);
+  void setLEDBrightness(const int brightness);
 
  private:
   Adafruit_NeoPixel m_pixels {Adafruit_NeoPixel(

@@ -25,3 +25,7 @@ void TensorLED::setLEDColor(char colorInput) {
 
   m_pixels.show();
 }
+
+void TensorLED::setLEDBrightness(const int brightness) {
+    m_pixels.setBrightness(brightness);
+}
