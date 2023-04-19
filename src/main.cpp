@@ -13,8 +13,8 @@ int potVal = 0;  // Stores the value currently read by the sensor.
 
 char colorInput = 'g';
 
-TensorServo* tensorServo;
-TensorLED* tensorLED;
+TensorServo* tensorServo {nullptr};
+TensorLED* tensorLED {nullptr};
 
 void setup() {
   M5.begin();
