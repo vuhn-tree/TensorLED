@@ -4,7 +4,6 @@
 #include <TensorServo.h>
 #include <PinDefines.h>
 
-
 const int DISP_OFFSET = 25;
 
 int potVal = 0;  // Stores the value currently read by the sensor.
