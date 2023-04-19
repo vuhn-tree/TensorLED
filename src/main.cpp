@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
-#include <TensorServo.h>
 #include <TensorLED.h>
+#include <TensorServo.h>
 
 #define PORT_A 32
 #define PORT_B 26
@@ -10,11 +10,10 @@
 const int DISP_OFFSET = 25;
 
 int potVal = 0;  // Stores the value currently read by the sensor.
-
 char colorInput = 'g';
 
-TensorServo* tensorServo {nullptr};
-TensorLED* tensorLED {nullptr};
+TensorServo* tensorServo{nullptr};
+TensorLED* tensorLED{nullptr};
 
 void setup() {
   M5.begin();
