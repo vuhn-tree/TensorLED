@@ -2,10 +2,8 @@
 #include <M5Core2.h>
 #include <TensorLED.h>
 #include <TensorServo.h>
+#include <PinDefines.h>
 
-#define PORT_A 32
-#define PORT_B 26
-#define PORT_C 13
 
 const int DISP_OFFSET = 25;
 
