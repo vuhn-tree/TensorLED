@@ -1,8 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-
-#define PORT_A 32
-#define PORT_B 26
-#define PORT_C 13
+#include <PinDefines.h>
 
 #define NUM_LEDS 3
 
