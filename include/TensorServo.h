@@ -1,3 +1,6 @@
+#ifndef TENSOR_SERVO_H
+#define TENSOR_SERVO_H
+
 #include <PinDefines.h>
 #include <Wire.h>
 
@@ -22,3 +25,5 @@ class TensorServo {
  private:
   Adafruit_PWMServoDriver m_pwm{Adafruit_PWMServoDriver(0x40, Wire1)};
 };
+
+#endif // TENSOR_SERVO_H
