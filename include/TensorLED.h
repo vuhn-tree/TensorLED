@@ -1,3 +1,6 @@
+#ifndef TENSOR_LED_H
+#define TENSOR_LED_H
+
 #include <Adafruit_NeoPixel.h>
 #include <PinDefines.h>
 
@@ -14,3 +17,5 @@ class TensorLED {
       NUM_LEDS, PORT_B,
       NEO_GRB + NEO_KHZ800)};  // set number of LEDs, pin number, LED type.
 };
+
+#endif // TENSOR_LED_H
