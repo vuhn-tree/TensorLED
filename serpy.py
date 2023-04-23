@@ -1,5 +1,4 @@
-import serial
-import argparse, time
+import serial, argparse
 
 ser = serial.Serial()
 ser.baudrate = 9600
