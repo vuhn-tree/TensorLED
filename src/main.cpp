@@ -25,6 +25,7 @@ void setup() {
 
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
+  tensorLED->setBrightness(120);
 }
 
 void loop() {
@@ -67,7 +68,7 @@ void loop() {
     ++counter;
   }
 
-  tensorLED->setBrightness(120);
+
   tensorLED->setColor(colorInput);
   // tensorServo->servo_angle_write(0, normalVal);
 
