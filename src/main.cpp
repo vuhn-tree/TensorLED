@@ -32,32 +32,32 @@ void loop() {
 
   char buf[40];
 
-  const float powerTemp = M5.Axp.GetTempInAXP192();
-  sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
-  M5.Lcd.drawString(buf, 0, DISP_OFFSET, 4);
+  // const float powerTemp = M5.Axp.GetTempInAXP192();
+  // sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
+  // M5.Lcd.drawString(buf, 0, DISP_OFFSET, 4);
 
-  const float batV = M5.Axp.GetBatVoltage();
-  const float batA = M5.Axp.GetBatCurrent();
-  sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
-  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 2, 4);
+  // const float batV = M5.Axp.GetBatVoltage();
+  // const float batA = M5.Axp.GetBatCurrent();
+  // sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
+  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 2, 4);
 
-  const float busV = M5.Axp.GetVBusVoltage();
-  const float busA = M5.Axp.GetVBusCurrent();
-  sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
-  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
+  // const float busV = M5.Axp.GetVBusVoltage();
+  // const float busA = M5.Axp.GetVBusCurrent();
+  // sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
+  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
 
-  const float vinV = M5.Axp.GetVinVoltage();
-  const float vinA = M5.Axp.GetVinCurrent();
-  sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
-  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
+  // const float vinV = M5.Axp.GetVinVoltage();
+  // const float vinA = M5.Axp.GetVinCurrent();
+  // sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
+  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
 
-  potVal = analogRead(PORT_C);  // read the value from the sensor.
-  const int normalVal = map(potVal, 0, 4096, 0, 255);
-  sprintf(buf, "Norm Pot: %03d%", normalVal);
-  M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
+  // potVal = analogRead(PORT_C);  // read the value from the sensor.
+  // const int normalVal = map(potVal, 0, 4096, 0, 255);
+  // sprintf(buf, "Norm Pot: %03d%", normalVal);
+  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
 
-  const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
-  M5.Axp.SetLcdVoltage(lcdPotVal);
+  // const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
+  // M5.Axp.SetLcdVoltage(lcdPotVal);
 
   int counter = 0;
   while (Serial.available()) {
@@ -67,11 +67,11 @@ void loop() {
     ++counter;
   }
 
-  tensorLED->setBrightness(normalVal);
+  tensorLED->setBrightness(120);
   tensorLED->setColor(colorInput);
-  tensorServo->servo_angle_write(0, normalVal);
+  // tensorServo->servo_angle_write(0, normalVal);
 
-  delay(500);
+  delay(50);
 
   if (M5.BtnA.read()) {
     M5.shutdown();
