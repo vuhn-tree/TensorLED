@@ -1,13 +1,13 @@
 #include <Adafruit_NeoPixel.h>
 #include <M5Core2.h>
+#include <PinDefines.h>
 #include <TensorLED.h>
 #include <TensorServo.h>
-#include <PinDefines.h>
 
 const int DISP_OFFSET = 25;
 
 const byte numChars = 32;
-char receivedChars[numChars];   // an array to store the received data
+char receivedChars[numChars];  // an array to store the received data
 
 boolean newData = false;
 
@@ -17,7 +17,7 @@ char colorInput = 'g';
 TensorServo* tensorServo{nullptr};
 TensorLED* tensorLED{nullptr};
 
-unsigned long waitTime = 3000; // ms
+unsigned long waitTime = 3000;  // ms
 unsigned long startTime = millis();
 
 void setup() {
@@ -35,39 +35,31 @@ void setup() {
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
   tensorLED->setBrightness(120);
-
-  
 }
- 
-void recvWithEndMarker()
-{
-   static byte ndx = 0;
-   char endMarker = '\n';
-   char rc;
 
-   while (Serial.available() > 0 && newData == false)
-   {
-      rc = Serial.read();
-      if (rc == '\r') // ignore carruage return
-      {
-         return;
+void recvWithEndMarker() {
+  static byte ndx = 0;
+  char endMarker = '\n';
+  char rc;
+
+  while (Serial.available() > 0 && newData == false) {
+    rc = Serial.read();
+    if (rc == '\r')  // ignore carruage return
+    {
+      return;
+    }
+    if (rc != endMarker) {
+      receivedChars[ndx] = rc;
+      ndx++;
+      if (ndx >= numChars) {
+        ndx = numChars - 1;
       }
-      if (rc != endMarker)
-      {
-         receivedChars[ndx] = rc;
-         ndx++;
-         if (ndx >= numChars)
-         {
-            ndx = numChars - 1;
-         }
-      }
-      else
-      {
-         receivedChars[ndx] = '\0'; // terminate the string
-         ndx = 0;
-         newData = true;
-      }
-   }
+    } else {
+      receivedChars[ndx] = '\0';  // terminate the string
+      ndx = 0;
+      newData = true;
+    }
+  }
 }
 
 void loop() {
@@ -81,25 +73,25 @@ void loop() {
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
 
   int counter = 0;
-  while(Serial.available() > 0) {
+  while (Serial.available() > 0) {
     colorInput = Serial.read();
     sprintf(buf, "[%d] color: %c", counter, colorInput);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
     ++counter;
   }
-  
+
   // if(Serial.available() > 0) {
   //   recvWithEndMarker();
   //   std::string s = receivedChars;
   //   M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
   // }
 
-  if(millis() - startTime >= waitTime) {
+  if (millis() - startTime >= waitTime) {
     long randomVal = random(0, 100);
     sprintf(buf, "Rand: %03ld%", randomVal);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
-    tensorServo->servo_angle_write(0, random(0, 100));   
-     startTime = millis();
+    tensorServo->servo_angle_write(0, random(0, 100));
+    startTime = millis();
   }
 
   tensorLED->setColor(colorInput);
