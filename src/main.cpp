@@ -18,6 +18,9 @@ char colorInput = 'g';
 TensorServo* tensorServo{nullptr};
 TensorLED* tensorLED{nullptr};
 
+unsigned long waitTime = 3000; // ms
+unsigned long startTime = millis();
+
 void setup() {
   M5.begin();
 
@@ -33,6 +36,8 @@ void setup() {
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
   tensorLED->setBrightness(120);
+
+  
 }
  
 void recvWithEndMarker()
@@ -126,7 +131,7 @@ void loop() {
   //   // std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
 
   // }
-  if(Serial.available()) {
+  if(Serial.available() > 0) {
    recvWithEndMarker();
     // sprintf(buf, "color: %s", receivedChars);
     std::string s = receivedChars;
@@ -149,7 +154,7 @@ M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
 //   std::string delimiter = ",";
 //   // std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
 
-  char test1[] = "scott=foo,scott2=foo2\n";
+  // char test1[] = "scott=foo,scott2=foo2\n";
 
   // char * ptr;
   // // while(ptr != NULL) {
@@ -165,23 +170,60 @@ M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
   // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 3, 4);    
 
 
-  char * ptr;
-  // // while(ptr != NULL) {
-  ptr = strtok(receivedChars, ",");  //skip to first =
-  M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
-  ptr = strtok(NULL, ",");  //get the diameter as a string
-  M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 2, 4);    
-
-
-  // ptr = strtok(NULL, "=");  //skip to first =
+  // char * ptr = NULL;
+  // // // while(ptr != NULL) {
+  // ptr = strtok(receivedChars, ",");  //skip to first =
   // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
-  ptr = strtok(NULL, ",");  //get the diameter as a string
-  M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 3, 4);    
+  // ptr = strtok(NULL, ",");  //get the diameter as a string
+  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 2, 4);    
+
+
+  // // ptr = strtok(NULL, "=");  //skip to first =
+  // // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
+  // ptr = strtok(NULL, ",");  //get the diameter as a string
+  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 3, 4);    
+
+  // std::string s = "scott>=tiger>=mushroom";
+  std::string delimiter = ",";
+
+  size_t pos = 0;
+  std::string token;
+
+  pos = s.find(delimiter);
+  token = s.substr(0, pos);
+  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 1, 4); 
+  s.erase(0, pos + delimiter.length());
+
+
+  pos = s.find(delimiter);
+  token = s.substr(0, pos);
+  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 2, 4); 
+  s.erase(0, pos + delimiter.length());
+
+  pos = s.find(delimiter);
+  token = s.substr(0, pos);
+  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 3, 4); 
+  s.erase(0, pos + delimiter.length());
+  
+
+  // while ((pos = s.find(delimiter)) != std::string::npos) {
+  //     token = s.substr(0, pos);
+  //     // std::cout << token << std::endl;
+  //     s.erase(0, pos + delimiter.length());
+  // }
+  // std::cout << s << std::endl;
 
 
   // }
   }
 
+
+
+
+  if(millis() - startTime >= waitTime) {
+    tensorServo->servo_angle_write(0, random(0, 100));   
+     startTime = millis();
+  }
 // size_t pos = 0;
 // std::string token;
 // while ((pos = s.find(delimiter)) != std::string::npos) {
@@ -207,7 +249,7 @@ M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
   // tensorServo->servo_angle_write(0, normalVal);
   // tensorServo->servo_angle_write(1, normalVal);
 
-  delay(2000);
+  delay(20);
 
   if (M5.BtnA.read()) {
     M5.shutdown();
