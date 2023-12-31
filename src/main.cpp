@@ -17,8 +17,10 @@ char colorInput = 'g';
 TensorServo* tensorServo{nullptr};
 TensorLED* tensorLED{nullptr};
 
-unsigned long waitTime = 3000;  // ms
+unsigned long waitTime = 3000;
 unsigned long startTime = millis();
+
+boolean potMode = false;
 
 void setup() {
   M5.begin();
@@ -85,8 +87,9 @@ void loop() {
   //   std::string s = receivedChars;
   //   M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
   // }
-
-  if (millis() - startTime >= waitTime) {
+if (potMode) {
+tensorServo->servo_angle_write(0, normalVal);
+}else if (millis() - startTime >= waitTime) {
     long randomVal = random(0, 100);
     sprintf(buf, "Rand: %03ld%", randomVal);
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
@@ -102,6 +105,11 @@ void loop() {
 
   if (M5.BtnA.read()) {
     M5.shutdown();
+  }
+
+  if (M5.BtnB.read()) {
+   //  M5.shutdown();
+   potMode = !potMode;
   }
 
   if (M5.BtnC.read()) {
