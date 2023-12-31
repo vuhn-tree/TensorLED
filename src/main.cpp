@@ -22,6 +22,8 @@ unsigned long startTime = millis();
 
 boolean potMode = false;
 int lcdBrightness = 2500;
+boolean servoReverse = false;
+int servoVal = 0;
 
 void setup() {
   M5.begin();
@@ -89,18 +91,37 @@ void loop() {
   //   M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
   // }
 
-  if (potMode) {
-    tensorServo->servo_angle_write(0, normalVal);
-  } else if (millis() - startTime >= waitTime) {
-    long randomVal = random(0, 100);
-    sprintf(buf, "Rand: %03ld%", randomVal);
-    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
-    tensorServo->servo_angle_write(0, random(0, 100));
-    startTime = millis();
-  }
+  //   if (potMode) {
+  //     tensorServo->servo_angle_write(0, normalVal);
+  //   } else if (millis() - startTime >= waitTime) {
+  //     long randomVal = random(0, 100);
+  //     sprintf(buf, "Rand: %03ld%", randomVal);
+  //     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
+  //    //  tensorServo->servo_angle_write(0, random(0, 100));
+  //    //  tensorServo->servo_angle_write(1, random(0, 255));
+  //     startTime = millis();
+  //   }
 
   tensorLED->setColor(colorInput);
-  // tensorServo->servo_angle_write(0, normalVal);
+
+  if (!potMode) {
+    if (servoReverse) {
+      servoVal--;
+    } else {
+      servoVal++;
+    }
+
+    tensorServo->servo_angle_write(0, servoVal);
+    if (servoVal <= 0) {
+      servoReverse = false;
+    }
+    if (servoVal >= 100) {
+      servoReverse = true;
+    }
+  } else {
+    tensorServo->servo_angle_write(0, normalVal);
+  }
+  //   servoReverse =
   // tensorServo->servo_angle_write(1, normalVal);
 
   delay(20);
