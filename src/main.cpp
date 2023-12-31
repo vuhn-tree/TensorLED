@@ -75,25 +75,6 @@ void loop() {
 
   char buf[40];
 
-  // const float powerTemp = M5.Axp.GetTempInAXP192();
-  // sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
-  // M5.Lcd.drawString(buf, 0, DISP_OFFSET, 4);
-
-  // const float batV = M5.Axp.GetBatVoltage();
-  // const float batA = M5.Axp.GetBatCurrent();
-  // sprintf(buf, "Batt.: %2.2fV %2.1fmA", batV, batA);
-  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 2, 4);
-
-  // const float busV = M5.Axp.GetVBusVoltage();
-  // const float busA = M5.Axp.GetVBusCurrent();
-  // sprintf(buf, "VBUS: %2.2fV %2.1fmA", busV, busA);
-  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
-
-  // const float vinV = M5.Axp.GetVinVoltage();
-  // const float vinA = M5.Axp.GetVinCurrent();
-  // sprintf(buf, "vin: %2.2fV %2.1fmA", vinV, vinA);
-  // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
-
   potVal = analogRead(PORT_C);  // read the value from the sensor.
   const int normalVal = map(potVal, 0, 4096, 0, 255);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
@@ -106,32 +87,11 @@ void loop() {
     M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
     ++counter;
   }
+  
   // if(Serial.available() > 0) {
   //   recvWithEndMarker();
   //   std::string s = receivedChars;
   //   M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
-
-  // std::string delimiter = ",";
-
-  // size_t pos = 0;
-  // std::string token;
-
-  // pos = s.find(delimiter);
-  // token = s.substr(0, pos);
-  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 1, 4); 
-  // s.erase(0, pos + delimiter.length());
-
-
-  // pos = s.find(delimiter);
-  // token = s.substr(0, pos);
-  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 2, 4); 
-  // s.erase(0, pos + delimiter.length());
-
-  // pos = s.find(delimiter);
-  // token = s.substr(0, pos);
-  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 3, 4); 
-  // s.erase(0, pos + delimiter.length());
-
   // }
 
   if(millis() - startTime >= waitTime) {
