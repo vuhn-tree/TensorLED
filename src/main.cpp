@@ -21,6 +21,7 @@ unsigned long waitTime = 1500;
 unsigned long startTime = millis();
 
 boolean potMode = false;
+int lcdBrightness = 2500;
 
 void setup() {
   M5.begin();
@@ -113,6 +114,11 @@ void loop() {
   }
 
   if (M5.BtnC.read()) {
-    M5.Axp.SetLcdVoltage(3300);
+    if (lcdBrightness == 3300) {
+      lcdBrightness = 2500;
+    } else {
+      lcdBrightness += 200;
+    }
+    M5.Axp.SetLcdVoltage(lcdBrightness);
   }
 }
