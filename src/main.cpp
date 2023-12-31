@@ -3,7 +3,6 @@
 #include <TensorLED.h>
 #include <TensorServo.h>
 #include <PinDefines.h>
-// #include <sstream>
 
 const int DISP_OFFSET = 25;
 
@@ -100,150 +99,48 @@ void loop() {
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
 
-  // const int lcdPotVal = map(potVal, 0, 4096, 2500, 3300);
-  // M5.Axp.SetLcdVoltage(lcdPotVal);
-
-  // int counter = 0;
-  // if (Serial.available() > 0) {
-  //   // colorInput = Serial.read();
-  //   // sprintf(buf, "[%d] color: %c", counter, colorInput);
-  //   // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
-  //   // ++counter;
-  //   // processIncomingByte(Serial.read());
-
-  //   colorInput = Serial.read();
-  //   sprintf(buf, "color: %c", colorInput);
-  //   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
-
-
-
-  //   // std::string s = "scott>=tiger";
-  //   // String str = Serial.readStringUntil('\n');
-  //   // int test = Serial.parseInt();
-  //   // std::string s = Serial.readString().c_str();
-  //   // std::string delimiter = ">=";
-  //   // std::string token = s.substr(0, s.find(">=")); // token is "scott"
-  //   // sprintf(buf, "color: %d", test);
-  //   // M5.Lcd.drawString(buf, 0, DISP_OFFSET * 4, 4);
-
-  //   // std::string s = Serial.readString();
-  //   // std::string delimiter = ">=";
-  //   // std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
-
-  // }
-  if(Serial.available() > 0) {
-   recvWithEndMarker();
-    // sprintf(buf, "color: %s", receivedChars);
-    std::string s = receivedChars;
-M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
-
-// std::string input("ab=xy z,time a=1s");
-  // std::istringstream iss(s);
-
-  // std::vector<Flag_name_value> flags;
-
-  // std::string token;
-  // // Flag_name_value flag;
-  // while (std::getline(s, token, ',')) {
-  //     size_t pos   = token.find('=');
-  //     std::string name    = token.substr(0, pos);
-  //     std::string value   = token.substr(pos + 1);
-  //     // flags.push_back(flag);
-  // }
-
-//   std::string delimiter = ",";
-//   // std::string token = s.substr(0, s.find(delimiter)); // token is "scott"
-
-  // char test1[] = "scott=foo,scott2=foo2\n";
-
-  // char * ptr;
-  // // while(ptr != NULL) {
-  // ptr = strtok(receivedChars, "=");  //skip to first =
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 2, 4);    
-  // ptr = strtok(NULL, ",");  //get the diameter as a string
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 4, 4);    
-
-
-  // ptr = strtok(NULL, "=");  //skip to first =
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
-  // ptr = strtok(NULL, ",");  //get the diameter as a string
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 3, 4);    
-
-
-  // char * ptr = NULL;
-  // // // while(ptr != NULL) {
-  // ptr = strtok(receivedChars, ",");  //skip to first =
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
-  // ptr = strtok(NULL, ",");  //get the diameter as a string
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 2, 4);    
-
-
-  // // ptr = strtok(NULL, "=");  //skip to first =
-  // // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 1, 4);    
-  // ptr = strtok(NULL, ",");  //get the diameter as a string
-  // M5.Lcd.drawString(ptr, 0, DISP_OFFSET * 3, 4);    
-
-  // std::string s = "scott>=tiger>=mushroom";
-  std::string delimiter = ",";
-
-  size_t pos = 0;
-  std::string token;
-
-  pos = s.find(delimiter);
-  token = s.substr(0, pos);
-  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 1, 4); 
-  s.erase(0, pos + delimiter.length());
-
-
-  pos = s.find(delimiter);
-  token = s.substr(0, pos);
-  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 2, 4); 
-  s.erase(0, pos + delimiter.length());
-
-  pos = s.find(delimiter);
-  token = s.substr(0, pos);
-  M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 3, 4); 
-  s.erase(0, pos + delimiter.length());
-  
-
-  // while ((pos = s.find(delimiter)) != std::string::npos) {
-  //     token = s.substr(0, pos);
-  //     // std::cout << token << std::endl;
-  //     s.erase(0, pos + delimiter.length());
-  // }
-  // std::cout << s << std::endl;
-
-
-  // }
+  int counter = 0;
+  while(Serial.available() > 0) {
+    colorInput = Serial.read();
+    sprintf(buf, "[%d] color: %c", counter, colorInput);
+    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 6, 4);
+    ++counter;
   }
+  // if(Serial.available() > 0) {
+  //   recvWithEndMarker();
+  //   std::string s = receivedChars;
+  //   M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 4, 4);
+
+  // std::string delimiter = ",";
+
+  // size_t pos = 0;
+  // std::string token;
+
+  // pos = s.find(delimiter);
+  // token = s.substr(0, pos);
+  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 1, 4); 
+  // s.erase(0, pos + delimiter.length());
 
 
+  // pos = s.find(delimiter);
+  // token = s.substr(0, pos);
+  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 2, 4); 
+  // s.erase(0, pos + delimiter.length());
 
+  // pos = s.find(delimiter);
+  // token = s.substr(0, pos);
+  // M5.Lcd.drawString(token.c_str(), 0, DISP_OFFSET * 3, 4); 
+  // s.erase(0, pos + delimiter.length());
+
+  // }
 
   if(millis() - startTime >= waitTime) {
+    long randomVal = random(0, 100);
+    sprintf(buf, "Rand: %03ld%", randomVal);
+    M5.Lcd.drawString(buf, 0, DISP_OFFSET * 3, 4);
     tensorServo->servo_angle_write(0, random(0, 100));   
      startTime = millis();
   }
-// size_t pos = 0;
-// std::string token;
-// while ((pos = s.find(delimiter)) != std::string::npos) {
-//     token = s.substr(0, pos);
-
-//     size_t pos   = token.find('=');
-//     std::string name    = token.substr(0, pos);
-//     std::string value   = token.substr(pos + 1);
-
-//     // std::string fool = token.substr(0, token.find('+')); // token 
-    
-//     M5.Lcd.drawString(name.c_str(), 0, DISP_OFFSET * 4, 4);    
-//     M5.Lcd.drawString(value.c_str(), 0, DISP_OFFSET * 2, 4);    
-//     // std::cout << token << std::endl;
-    
-//     s.erase(0, pos + delimiter.length());
-  
-// }
-// M5.Lcd.drawString(s.c_str(), 0, DISP_OFFSET * 3, 4);
-    
 
   tensorLED->setColor(colorInput);
   // tensorServo->servo_angle_write(0, normalVal);
