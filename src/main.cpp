@@ -139,9 +139,7 @@ void loop() {
   } else {
     tensorServo->servo_angle_write(0, normalVal);
   }
-  //   servoReverse =
-  // tensorServo->servo_angle_write(1, normalVal);
-
+  
   delay(20);
 
   if (M5.BtnA.read()) {
