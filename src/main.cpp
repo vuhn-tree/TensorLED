@@ -85,11 +85,10 @@ void loop() {
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
 
-  cur_value1 = digitalRead(32);  // read the value of BUTTON. 
+  cur_value1 = digitalRead(32);  // read the value of BUTTON.
   M5.Lcd.drawString(std::to_string(cur_value1).c_str(), 0, DISP_OFFSET * 2, 4);
-  cur_value2 = digitalRead(33);  // read the value of BUTTON. 
+  cur_value2 = digitalRead(33);  // read the value of BUTTON.
   M5.Lcd.drawString(std::to_string(cur_value2).c_str(), 0, DISP_OFFSET * 3, 4);
-  
 
   int counter = 0;
   while (Serial.available() > 0) {
@@ -116,81 +115,76 @@ void loop() {
   //     startTime = millis();
   //   }
 
-
-
-if (stopServos == false) {
+  if (stopServos == false) {
     tensorLED->setColor(colorInput);
-  if (!potMode) {
-    if (servoReverse) {
-      servoVal--;
+    if (!potMode) {
+      if (servoReverse) {
+        servoVal--;
+      } else {
+        servoVal++;
+      }
+
+      tensorServo->servo_angle_write(0, servoVal);
+      if (servoVal <= 0) {
+        servoReverse = false;
+      }
+      if (servoVal >= 90) {
+        servoReverse = true;
+      }
+
+      if (servoWheelReverse) {
+        servoWheelVal--;
+      } else {
+        servoWheelVal++;
+      }
+
+      tensorServo->servo_angle_write(1, servoWheelVal);
+      if (servoWheelVal <= 0) {
+        servoWheelReverse = false;
+      }
+      if (servoWheelVal >= 255) {
+        servoWheelReverse = true;
+      }
+
     } else {
-      servoVal++;
+      tensorServo->servo_angle_write(0, normalVal);
     }
-
-    tensorServo->servo_angle_write(0, servoVal);
-    if (servoVal <= 0) {
-      servoReverse = false;
-    }
-    if (servoVal >= 90) {
-      servoReverse = true;
-    }
-
-
-    if (servoWheelReverse) {
-      servoWheelVal--;
-    } else {
-      servoWheelVal++;
-    }
-
-    tensorServo->servo_angle_write(1, servoWheelVal);
-   if (servoWheelVal <= 0) {
-      servoWheelReverse = false;
-    }
-    if (servoWheelVal >= 255) {
-      servoWheelReverse = true;
-    }
-
-  } else {
-    tensorServo->servo_angle_write(0, normalVal);
   }
+  // else {
+  //   if (M5.BtnA.read()) {
+  //     char red = 'r';
+  //     tensorLED->setColor(red);
+  //   }
+  //   if (M5.BtnB.read()) {
+  //     char green = 'g';
+  //     tensorLED->setColor(green);
+  //   }
+  //   if (M5.BtnC.read()) {
+  //     char blue = 'b';
+  //     tensorLED->setColor(blue);
+  //   }
+  // }
 
-} 
-// else {
-//   if (M5.BtnA.read()) {
-//     char red = 'r';
-//     tensorLED->setColor(red);
-//   }
-//   if (M5.BtnB.read()) {
-//     char green = 'g';
-//     tensorLED->setColor(green);
-//   }
-//   if (M5.BtnC.read()) {
-//     char blue = 'b';
-//     tensorLED->setColor(blue);
-//   }
-// }
-  
   if (!digitalRead(32)) {
-        char red = 'r';
+    char red = 'r';
     tensorLED->setColor(red);
   }
 
   if (!digitalRead(33)) {
-        char blue = 'b';
+    char blue = 'b';
     tensorLED->setColor(blue);
-  
   }
 
   if (!digitalRead(33) && !digitalRead(32)) {
-        char green = 'g';
+    char green = 'g';
     tensorLED->setColor(green);
   }
 
   delay(20);
 
-    if (M5.BtnA.read()) {
+  if (M5.BtnA.read()) {
     // M5.shutdown();
-    
+
     stopServos = true;
     tensorServo->servo_angle_write(1, 45);
     tensorServo->servo_angle_write(0, 45);
