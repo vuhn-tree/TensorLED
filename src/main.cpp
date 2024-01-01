@@ -23,7 +23,9 @@ unsigned long startTime = millis();
 boolean potMode = false;
 int lcdBrightness = 2500;
 boolean servoReverse = false;
+boolean servoWheelReverse = false;
 int servoVal = 0;
+int servoWheelVal = 0;
 
 void setup() {
   M5.begin();
@@ -115,9 +117,25 @@ void loop() {
     if (servoVal <= 0) {
       servoReverse = false;
     }
-    if (servoVal >= 100) {
+    if (servoVal >= 90) {
       servoReverse = true;
     }
+
+
+    if (servoWheelReverse) {
+      servoWheelVal--;
+    } else {
+      servoWheelVal++;
+    }
+
+    tensorServo->servo_angle_write(1, servoWheelVal);
+   if (servoWheelVal <= 0) {
+      servoWheelReverse = false;
+    }
+    if (servoWheelVal >= 255) {
+      servoWheelReverse = true;
+    }
+
   } else {
     tensorServo->servo_angle_write(0, normalVal);
   }
