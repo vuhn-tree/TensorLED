@@ -26,6 +26,7 @@ boolean servoReverse = false;
 boolean servoWheelReverse = false;
 int servoVal = 0;
 int servoWheelVal = 0;
+boolean stopServos = false;
 
 void setup() {
   M5.begin();
@@ -106,6 +107,7 @@ void loop() {
 
   tensorLED->setColor(colorInput);
 
+if (stopServos == false) {
   if (!potMode) {
     if (servoReverse) {
       servoVal--;
@@ -139,11 +141,16 @@ void loop() {
   } else {
     tensorServo->servo_angle_write(0, normalVal);
   }
+}
   
   delay(20);
 
   if (M5.BtnA.read()) {
-    M5.shutdown();
+    // M5.shutdown();
+    
+    stopServos = true;
+    tensorServo->servo_angle_write(1, 45);
+    tensorServo->servo_angle_write(0, 45);
   }
 
   if (M5.BtnB.read()) {
