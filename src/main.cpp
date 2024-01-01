@@ -28,9 +28,14 @@ int servoVal = 0;
 int servoWheelVal = 0;
 boolean stopServos = false;
 
+int cur_value1 = 0, cur_value2 = 0;
+
 void setup() {
   M5.begin();
 
+  // pinMode(PORT_A, INPUT);  // Sets the specified pin to input mode.
+  pinMode(32, INPUT);
+  pinMode(33, INPUT);
   pinMode(PORT_C, INPUT);  // Sets the specified pin to input mode.
 
   M5.Axp.SetLcdVoltage(2600);
@@ -80,6 +85,12 @@ void loop() {
   sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.drawString(buf, 0, DISP_OFFSET * 5, 4);
 
+  cur_value1 = digitalRead(32);  // read the value of BUTTON. 
+  M5.Lcd.drawString(std::to_string(cur_value1).c_str(), 0, DISP_OFFSET * 2, 4);
+  cur_value2 = digitalRead(33);  // read the value of BUTTON. 
+  M5.Lcd.drawString(std::to_string(cur_value2).c_str(), 0, DISP_OFFSET * 3, 4);
+  
+
   int counter = 0;
   while (Serial.available() > 0) {
     colorInput = Serial.read();
@@ -105,9 +116,10 @@ void loop() {
   //     startTime = millis();
   //   }
 
-  tensorLED->setColor(colorInput);
+
 
 if (stopServos == false) {
+    tensorLED->setColor(colorInput);
   if (!potMode) {
     if (servoReverse) {
       servoVal--;
@@ -141,11 +153,42 @@ if (stopServos == false) {
   } else {
     tensorServo->servo_angle_write(0, normalVal);
   }
-}
+
+} 
+// else {
+//   if (M5.BtnA.read()) {
+//     char red = 'r';
+//     tensorLED->setColor(red);
+//   }
+//   if (M5.BtnB.read()) {
+//     char green = 'g';
+//     tensorLED->setColor(green);
+//   }
+//   if (M5.BtnC.read()) {
+//     char blue = 'b';
+//     tensorLED->setColor(blue);
+//   }
+// }
   
+  if (!digitalRead(32)) {
+        char red = 'r';
+    tensorLED->setColor(red);
+  }
+
+  if (!digitalRead(33)) {
+        char blue = 'b';
+    tensorLED->setColor(blue);
+  
+  }
+
+  if (!digitalRead(33) && !digitalRead(32)) {
+        char green = 'g';
+    tensorLED->setColor(green);
+  }
+
   delay(20);
 
-  if (M5.BtnA.read()) {
+    if (M5.BtnA.read()) {
     // M5.shutdown();
     
     stopServos = true;
