@@ -43,7 +43,8 @@ void setup() {
   M5.Lcd.drawString("RGB Monitor", 0, 0, 4);
   M5.Axp.SetLcdVoltage(2600);
 
-  Serial.begin(9600);
+  // Serial.begin(9600);
+  Serial.begin(500000);
 
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
@@ -180,7 +181,7 @@ void loop() {
     tensorLED->setColor(green);
   }
 
-  delay(20);
+  // delay(20);
 
   if (M5.BtnA.read()) {
     // M5.shutdown();
