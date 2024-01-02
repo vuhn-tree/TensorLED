@@ -28,6 +28,13 @@ void TensorLED::setColor(char& colorInput) {
       m_pixels.setPixelColor(2, m_pixels.Color(0, 0, 100));
       break;
 
+    case 'n':
+      // blue
+      m_pixels.setPixelColor(0, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(1, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(2, m_pixels.Color(0, 0, 0));
+      break;
+
     default:
       break;
   }
