@@ -9,17 +9,23 @@ void TensorLED::setColor(char& colorInput) {
   switch (colorInput) {
     case 'r':
     // red
-      m_pixels.setPixelColor(1, m_pixels.Color(100, 0, 0));
+      m_pixels.setPixelColor(1, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(2, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(0, m_pixels.Color(100, 0, 0));
       break;
 
     case 'g':
     // green
+      m_pixels.setPixelColor(0, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(2, m_pixels.Color(0, 0, 0));
       m_pixels.setPixelColor(1, m_pixels.Color(0, 100, 0));
       break;
 
     case 'b':
     // blue
-      m_pixels.setPixelColor(1, m_pixels.Color(0, 0, 100));
+      m_pixels.setPixelColor(0, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(1, m_pixels.Color(0, 0, 0));
+      m_pixels.setPixelColor(2, m_pixels.Color(0, 0, 100));
       break;
 
     default:
