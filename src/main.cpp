@@ -43,8 +43,8 @@ void setup() {
   M5.Lcd.drawString("RGB Monitor V1", 0, 0, 4);
   M5.Axp.SetLcdVoltage(2600);
 
-  // Serial.begin(9600);
-  Serial.begin(500000);
+  Serial.begin(9600);
+  // Serial.begin(500000);
 
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
