@@ -181,8 +181,6 @@ void loop() {
     tensorLED->setColor(green);
   }
 
-  // delay(20);
-
   if (M5.BtnA.read()) {
     // M5.shutdown();
 
