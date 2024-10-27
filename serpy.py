@@ -9,7 +9,7 @@ ser.open()
 print("Current port: " + ser.port)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--color", help="b, g, r")
+parser.add_argument("--color", help="b, g, r, n")
 parser.add_argument("--servo", help="90 - 90")
 parser.add_argument("--random", action="store_true", help="random color")
 
