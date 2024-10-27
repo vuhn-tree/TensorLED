@@ -140,7 +140,7 @@ void loop() {
       }
 
       tensorServo->servo_angle_write(1, servoWheelVal);
-      if (servoWheelVal <= 0) {
+      if (servoWheelVal <= 10) {
         servoWheelReverse = false;
       }
       if (servoWheelVal >= 255) {
