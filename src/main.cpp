@@ -182,8 +182,6 @@ void loop() {
   }
 
   if (M5.BtnA.read()) {
-    // M5.shutdown();
-
     stopServos = true;
     tensorServo->servo_angle_write(1, 45);
     tensorServo->servo_angle_write(0, 45);
