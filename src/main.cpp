@@ -44,8 +44,7 @@ void setup() {
   M5.Axp.SetLcdVoltage(2600);
 
   Serial.begin(115200);
-  // Serial.begin(500000);
-
+  
   tensorServo = new TensorServo();
   tensorLED = new TensorLED();
   tensorLED->setBrightness(120);
